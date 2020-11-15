@@ -15,8 +15,6 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-import static java.awt.event.KeyEvent.*;
-
 public class Main
 {
     // ポート番号
@@ -51,113 +49,23 @@ public class Main
         logger.setLevel(Level.OFF);
 
         Main instance = new Main();
+        instance.init();
 
-        instance.receiverThread = new ReceiverThread(instance);
+        SwingUtilities.invokeLater(() -> new Window(instance));
+    }
+
+    private void init()
+    {
+        this.receiverThread = new ReceiverThread(this);
 
         try
         {
-            instance.robot = new Robot();
+            this.robot = new Robot();
         }
         catch (AWTException awtException)
         {
             awtException.printStackTrace();
         }
-
-        SwingUtilities.invokeLater(() -> new Window(instance));
-    }
-
-    @SuppressWarnings("DuplicatedCode")
-    private static void init(final Main instance)
-    {
-        instance.getKeys().put(VK_ESCAPE, false);
-        instance.getKeys().put(VK_F1, false);
-        instance.getKeys().put(VK_F2, false);
-        instance.getKeys().put(VK_F3, false);
-        instance.getKeys().put(VK_F4, false);
-        instance.getKeys().put(VK_F5, false);
-        instance.getKeys().put(VK_F6, false);
-        instance.getKeys().put(VK_F7, false);
-        instance.getKeys().put(VK_F8, false);
-        instance.getKeys().put(VK_F9, false);
-        instance.getKeys().put(VK_F10, false);
-        instance.getKeys().put(VK_F11, false);
-        instance.getKeys().put(VK_F12, false);
-        instance.getKeys().put(VK_BACK_QUOTE, false);
-        instance.getKeys().put(VK_1, false);
-        instance.getKeys().put(VK_2, false);
-        instance.getKeys().put(VK_3, false);
-        instance.getKeys().put(VK_4, false);
-        instance.getKeys().put(VK_5, false);
-        instance.getKeys().put(VK_6, false);
-        instance.getKeys().put(VK_7, false);
-        instance.getKeys().put(VK_8, false);
-        instance.getKeys().put(VK_9, false);
-        instance.getKeys().put(VK_0, false);
-        instance.getKeys().put(VK_MINUS, false);
-        instance.getKeys().put(VK_EQUALS, false);
-        instance.getKeys().put(VK_BACK_SPACE, false);
-        instance.getKeys().put(VK_TAB, false);
-        instance.getKeys().put(VK_CAPS_LOCK, false);
-        instance.getKeys().put(VK_A, false);
-        instance.getKeys().put(VK_B, false);
-        instance.getKeys().put(VK_C, false);
-        instance.getKeys().put(VK_D, false);
-        instance.getKeys().put(VK_E, false);
-        instance.getKeys().put(VK_F, false);
-        instance.getKeys().put(VK_G, false);
-        instance.getKeys().put(VK_H, false);
-        instance.getKeys().put(VK_I, false);
-        instance.getKeys().put(VK_J, false);
-        instance.getKeys().put(VK_K, false);
-        instance.getKeys().put(VK_L, false);
-        instance.getKeys().put(VK_M, false);
-        instance.getKeys().put(VK_N, false);
-        instance.getKeys().put(VK_O, false);
-        instance.getKeys().put(VK_P, false);
-        instance.getKeys().put(VK_Q, false);
-        instance.getKeys().put(VK_R, false);
-        instance.getKeys().put(VK_S, false);
-        instance.getKeys().put(VK_T, false);
-        instance.getKeys().put(VK_U, false);
-        instance.getKeys().put(VK_V, false);
-        instance.getKeys().put(VK_W, false);
-        instance.getKeys().put(VK_X, false);
-        instance.getKeys().put(VK_Y, false);
-        instance.getKeys().put(VK_Z, false);
-        instance.getKeys().put(VK_OPEN_BRACKET, false);
-        instance.getKeys().put(VK_CLOSE_BRACKET, false);
-        instance.getKeys().put(VK_BACK_SLASH, false);
-        instance.getKeys().put(VK_SEMICOLON, false);
-        instance.getKeys().put(VK_QUOTE, false);
-        instance.getKeys().put(VK_ENTER, false);
-        instance.getKeys().put(VK_PERIOD, false);
-        instance.getKeys().put(VK_SLASH, false);
-        instance.getKeys().put(VK_SPACE, false);
-        instance.getKeys().put(VK_PRINTSCREEN, false);
-        instance.getKeys().put(VK_SCROLL_LOCK, false);
-        instance.getKeys().put(VK_PAUSE, false);
-        instance.getKeys().put(VK_INSERT, false);
-        instance.getKeys().put(VK_DELETE, false);
-        instance.getKeys().put(VK_HOME, false);
-        instance.getKeys().put(VK_END, false);
-        instance.getKeys().put(VK_PAGE_UP, false);
-        instance.getKeys().put(VK_PAGE_DOWN, false);
-        instance.getKeys().put(VK_UP, false);
-        instance.getKeys().put(VK_LEFT, false);
-        instance.getKeys().put(VK_CLEAR, false);
-        instance.getKeys().put(VK_RIGHT, false);
-        instance.getKeys().put(VK_DOWN, false);
-        instance.getKeys().put(VK_NUM_LOCK, false);
-        instance.getKeys().put(VK_SEPARATER, false);
-        instance.getKeys().put(VK_SHIFT, false);
-        instance.getKeys().put(VK_CONTROL, false);
-        instance.getKeys().put(VK_ALT, false);
-        instance.getKeys().put(VK_META, false);
-        instance.getKeys().put(VK_CONTEXT_MENU, false);
-        instance.getKeys().put(VK_KATAKANA, false);
-        instance.getKeys().put(VK_UNDERSCORE, false);
-        instance.getKeys().put(VK_KANJI, false);
-        instance.getKeys().put(VK_HIRAGANA, false);
     }
 
     public Mode getMode()
