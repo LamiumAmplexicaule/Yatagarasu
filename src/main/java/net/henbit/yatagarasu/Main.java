@@ -17,26 +17,60 @@ import java.util.logging.Logger;
 
 public class Main
 {
-    // ポート番号
+
+    /**
+     * ポート番号
+     */
     public static final int PORT = 9090;
+
+    /**
+     * キーの状態管理
+     */
     private final Map<Integer, Boolean> keys = new HashMap<>();
-    // 動作のモード
+
+    /**
+     * 動作のモード
+     */
     private Mode mode = Mode.None;
-    // 接続先
+
+    /**
+     * 接続先
+     */
     private InetSocketAddress inetSocketAddress;
-    // シャットダウンフックが登録済みか
+
+    /**
+     * シャットダウンフックが登録済みか
+     */
     private boolean isHooked = false;
-    // クライアントソケット
+
+    /**
+     * クライアントソケット
+     */
     private AsynchronousSocketChannel clientSocket;
-    // サーバソケット
+
+    /**
+     * サーバソケット
+     */
     private AsynchronousServerSocketChannel serverSocket;
-    // ロボット
+
+    /**
+     * キーボード入力用
+     */
     private Robot robot;
-    // 有効か
+
+    /**
+     * 有効か
+     */
     private boolean enable = false;
-    // 受信用
+
+    /**
+     *  受信用
+     */
     private ReceiverThread receiverThread;
-    // キーフック解除
+
+    /**
+     * キーフック解除用
+     */
     private final Thread shutdownThread = new Thread(this::run);
 
     public static void main(String[] args)
@@ -54,6 +88,9 @@ public class Main
         SwingUtilities.invokeLater(() -> new Window(instance));
     }
 
+    /**
+     * 初期化
+     */
     private void init()
     {
         this.receiverThread = new ReceiverThread(this);
