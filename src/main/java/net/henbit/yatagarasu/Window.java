@@ -54,6 +54,7 @@ public class Window extends JFrame
             public void mousePressed(MouseEvent e)
             {
                 super.mouseClicked(e);
+                if (!e.getComponent().isEnabled()) return;
                 instance.setMode(Main.Mode.Sender);
                 ipAddressTextField.setEnabled(false);
                 senderButton.setEnabled(false);
@@ -74,6 +75,7 @@ public class Window extends JFrame
             public void mousePressed(MouseEvent e)
             {
                 super.mouseClicked(e);
+                if (!e.getComponent().isEnabled()) return;
                 instance.setMode(Main.Mode.Receiver);
                 ipAddressTextField.setEnabled(false);
                 receiverButton.setEnabled(false);
